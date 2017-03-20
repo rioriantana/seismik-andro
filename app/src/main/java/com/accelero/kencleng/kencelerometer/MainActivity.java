@@ -1,21 +1,18 @@
 package com.accelero.kencleng.kencelerometer;
 
 import android.hardware.Sensor;
-import android.net.Uri;
-import android.support.annotation.IntegerRes;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -27,7 +24,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public Integer i = 0;
     public String yoyoi = "yoi";
     public TextView sumbuX;
-    public TextView sumbuXX;
+    public TextView sumbuY;
+    public  TextView sumbuZ;
     private float z;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -42,7 +40,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         sumbuX = (TextView) findViewById(R.id.sumbuX);
 
-        sumbuXX = (TextView) findViewById(R.id.sumbuXX);
+        sumbuY = (TextView) findViewById(R.id.sumbuY);
+
+        sumbuZ = (TextView) findViewById(R.id.sumbuZ);
 
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         lastUpdate = System.currentTimeMillis();
@@ -72,10 +72,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         String nilaiX = Float.toString(x);
 
-        sumbuX.setText(nilaiX);
-        baris = new Float[0];
-        baris[i] = x;
-        i++;
+        sumbuX.setText(Float.toString(x));
+        sumbuY.setText(Float.toString(y));
+        sumbuZ.setText(Float.toString(z));
+       // baris = new Float[0];
+       // baris[i] = x;
+       // i++;
         lastUpdate = event.timestamp;
         //String[] arrayString  =  Arrays.copyOf(baris, baris.length, String[].class);
 

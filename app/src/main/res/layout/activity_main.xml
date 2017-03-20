@@ -34,14 +34,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="oke"/>
-</LinearLayout>
+
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/linearLayout"
+        android:layout_below="@+id/sumbuX"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/sumbuXX" />
+        android:id="@+id/sumbuY" />
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sumbuY"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/sumbuZ" />
+</LinearLayout>
 </RelativeLayout>
