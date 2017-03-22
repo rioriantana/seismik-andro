@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private void getAccelerometer(SensorEvent event) {
         float[] value = event.values;
-
+        Float alfa = (float) 13;
         x = value[0];
         y = value[1];
         z = value[2];
