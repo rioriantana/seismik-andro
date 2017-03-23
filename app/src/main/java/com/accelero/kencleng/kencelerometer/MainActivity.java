@@ -5,14 +5,24 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -49,6 +59,48 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        waktuKirim();
+    }
+
+    private class KirimData extends AsyncTask<String, Void, String>{
+        private String sumbux, sumbuy, sumbuz;
+
+        public KirimData(String sumbux, String sumbuy, String sumbuz){
+            this.sumbux = sumbux;
+            this.sumbuy = sumbuy;
+            this.sumbuz = sumbuz;
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder().url("http://192.168.43.208/cek_noise.php?kode=1&x="+sumbux+"&y="+sumbuy+"&z="+sumbuz).build();
+            return null;
+        }
+    }
+
+
+    private void waktuKirim(){
+        final Handler handler = new Handler();
+        Timer timer = new Timer();
+        TimerTask doAsynchronousTask(){
+            public void run(){
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            String sumbu_x = sumbuX.getText().toString();
+                            String sumbu_y = sumbuY.getText().toString();
+                            String sumbu_z = sumbuZ.getText().toString();
+                            new KirimData(sumbu_x,sumbu_y,sumbu_z).execute();
+                        }
+                        catch (Exception e){
+
+                        }
+                    }
+                });
+            }
+        }
+        timer.schedule(doAsynchronousTask, 0, 1);
     }
 
     @Override
